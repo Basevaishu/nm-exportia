@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NM Exportia | Connecting the World Through Trade</title>
+<style>
+:root{--green:#075b38;--dark:#06452d;--orange:#f28c28;--light:#f4f8f3;--ink:#17251d;--muted:#68766d}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:#fff}
+button,input,select,textarea{font:inherit}button,a{cursor:pointer}a{text-decoration:none;color:inherit}
+.topbar{background:var(--dark);color:#fff;padding:8px 3.5%;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px}
+.topbar-right{display:flex;gap:18px;flex-wrap:wrap}
+header{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:17px 3.5%;background:#fff;position:sticky;top:0;z-index:20;border-bottom:1px solid #edf0ed}
+.logo{display:flex;align-items:center;gap:10px;min-width:235px;color:var(--green)}
+.logo-mark{font-size:33px;font-weight:900;letter-spacing:-3px;color:var(--orange);line-height:1}
+.logo-mark span{color:var(--green)}
+.logo-name{font-size:27px;font-weight:900;white-space:nowrap}
+.logo-name small{display:block;font-size:10px;font-weight:400;letter-spacing:.2px;color:#718076;margin-top:2px}
+.search{display:flex;max-width:450px;flex:1}
+.search input{width:100%;padding:13px;border:1px solid #dfe4df;border-radius:6px 0 0 6px;background:#f7f8f7;outline-color:var(--green)}
+.search button{border:0;background:#16813e;color:#fff;padding:0 20px;border-radius:0 6px 6px 0;font-size:20px}
+.header-actions{display:flex;align-items:center;gap:20px}
+.action{border:0;background:none;color:#141b16;display:flex;align-items:center;gap:8px;font-size:13px;white-space:nowrap}
+.action .ico{font-size:25px}
+.cart-btn{border:0;background:none;font-size:14px;display:flex;gap:8px;align-items:center}
+nav{display:flex;align-items:center;justify-content:space-around;gap:20px;padding:13px 5%;border-bottom:1px solid #eee;flex-wrap:wrap}
+nav a{font-size:13px;font-weight:600;padding:5px 0}
+nav a:hover{color:var(--green);border-bottom:2px solid var(--green)}
+nav .quote{background:var(--green);color:#fff;padding:12px 25px;border-radius:5px}
+.hero{min-height:345px;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:15px;padding:38px 7.5%;background:linear-gradient(90deg,#fff8f0 0%,#fff4e8 48%,#dceaf3 100%);position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;inset:0;background:url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1800&q=85") center/cover;opacity:.13;pointer-events:none}
+.hero-content,.hero-art{position:relative;z-index:1}
+.hero .eyebrow{font-size:13px;color:var(--green);font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.hero h1{font-size:clamp(34px,4vw,54px);line-height:1.05;color:var(--green);margin:15px 0 12px;font-weight:900}
+.hero h1 span{color:#f28c28}
+.hero p{font-size:15px;line-height:1.6;max-width:560px;color:#29362e}
+.hero-features{display:flex;gap:18px;flex-wrap:wrap;margin:18px 0 20px;font-size:12px;font-weight:600}
+.hero-features span{display:flex;align-items:center;gap:6px}
+.hero-features b{color:var(--green);font-size:18px}
+.btn{display:inline-block;border:0;border-radius:6px;padding:12px 20px;font-weight:700;font-size:13px}
+.btn-green{background:var(--green);color:#fff}.btn-orange{background:var(--orange);color:#fff}.btn-white{background:#fff;color:var(--green);border:1px solid #dce6dc}
+.hero-art{min-height:270px;display:flex;align-items:center;justify-content:center}
+.hero-art img{width:100%;max-height:315px;object-fit:contain;mix-blend-mode:multiply;border-radius:12px}
+.slider-controls{position:absolute;z-index:3;left:16px;right:16px;top:48%;display:flex;justify-content:space-between;pointer-events:none}
+.slider-controls button{pointer-events:auto;border:1px solid #ddd;background:#fff;border-radius:5px;width:34px;height:34px;font-size:21px}
+.dots{display:flex;gap:7px;margin-top:16px}.dots button{border:0;border-radius:20px;width:8px;height:8px;background:#a8b7ad}.dots button.active{width:24px;background:var(--green)}
+.benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:15px 3.5%}
+.benefit{display:flex;align-items:center;gap:13px;background:#f3f5f3;padding:16px 20px;border-radius:9px;min-height:68px}
+.benefit .emoji{display:grid;place-items:center;width:43px;height:43px;flex-shrink:0;border-radius:50%;background:#e5efe7;color:var(--green);font-size:22px}
+.benefit strong{display:block;font-size:13px;margin-bottom:4px}.benefit small{font-size:12px;color:#6b746d}
+.section{padding:30px 3.5%}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
+.section-head h2{font-size:25px;color:#111f17}.section-head p{font-size:12px;color:#788279;margin-top:5px}
+.text-link{font-size:12px;font-weight:700;white-space:nowrap}
+.categories{display:grid;grid-template-columns:repeat(11,minmax(75px,1fr));gap:13px}
+.category{border:0;background:transparent;text-align:center;cursor:pointer;min-width:0}
+.category img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:50%;border:1px solid #e9ece9;padding:4px;background:white;transition:.2s}
+.category:hover img{transform:translateY(-3px);box-shadow:0 5px 14px #0001}
+.category h3{font-size:12px;margin-top:8px;font-weight:600}
+.products-section{background:#f8faf7}
+.product-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:17px;font-size:13px;color:#68766d}
+.product-toolbar select{padding:9px 12px;border:1px solid #dfe4df;border-radius:5px;background:#fff}
+.products{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:13px}
+.product-card{background:#fff;border:1px solid #e5e9e5;border-radius:9px;overflow:hidden;transition:.2s;min-width:0}
+.product-card:hover{transform:translateY(-3px);box-shadow:0 8px 18px #0000000d}
+.product-image{position:relative;background:#f2f2f2}
+.product-card img{width:100%;height:132px;object-fit:cover;display:block}
+.wish{position:absolute;top:8px;right:8px;border:0;border-radius:50%;background:#ffffffed;width:28px;height:28px;font-size:18px;color:#355445}
+.product-info{padding:10px}
+.category-label{font-size:10px;color:#78847b;text-transform:uppercase;letter-spacing:.6px}
+.product-info h3{font-size:13px;margin:6px 0;line-height:1.3;min-height:32px}
+.product-info p{font-size:11px;line-height:1.4;color:#788078;min-height:31px}
+.price-row{display:flex;align-items:center;justify-content:space-between;gap:5px;margin:9px 0}
+.price{font-weight:800;font-size:16px;color:#111}.price small{font-size:11px;font-weight:400;color:#666}
+.rating{color:#f2a000;font-size:12px;margin:3px 0 9px}
+.card-buttons{display:flex;gap:5px}.card-buttons button{flex:1;padding:9px 4px;font-size:11px;border-radius:4px;font-weight:700}
+.add-btn{border:1px solid #ef7f10;color:#fff;background:#f28c28}.buy-btn{border:1px solid #14823e;color:#fff;background:#16813e}
+.promo-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.promo{min-height:170px;padding:23px;border-radius:9px;background-size:cover;background-position:center;color:#fff;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
+.promo h2{font-size:21px;line-height:1.25;max-width:310px;margin-bottom:8px}
+.promo p{font-size:12px;line-height:1.5;max-width:300px;margin-bottom:14px}
+.promo .btn{padding:10px 15px;font-size:12px}
+.promo.farm{background-image:linear-gradient(90deg,#063d2bec,#063d2b44),url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900&q=80")}
+.promo.ship{background-image:linear-gradient(90deg,#eaf3f8f2,#eaf3f855),url("https://images.unsplash.com/photo-1494412519320-aa613dfb7738?auto=format&fit=crop&w=900&q=80");color:#15241d}
+.promo.global{background-image:linear-gradient(90deg,#073d2be8,#073d2b55),url("https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=900&q=80")}
+.service-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:0;padding:20px 3.5%;border-top:1px solid #eee}
+.service{display:flex;align-items:center;justify-content:center;gap:12px;padding:8px;border-right:1px solid #eee}
+.service:last-child{border:0}.service .symbol{font-size:25px}.service strong{display:block;font-size:12px}.service small{font-size:11px;color:#68766d}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.step{text-align:center;padding:20px;border:1px solid #e8eee7;border-radius:10px}
+.step .icon{font-size:27px;margin-bottom:10px}.step h3{font-size:15px;color:var(--green);margin-bottom:7px}.step p{font-size:12px;color:#68766d;line-height:1.6}
+.contact-section{background:#f4f8f3}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.contact-info,.contact-form{background:#fff;padding:25px;border-radius:10px}
+.contact-info h2,.contact-form h3{color:var(--green);margin-bottom:12px}
+.contact-info p{font-size:13px;color:#68766d;line-height:1.7;margin-bottom:10px}
+.contact-item{padding:12px 0;border-bottom:1px solid #edf0ed;font-size:13px;line-height:1.7}.contact-item strong{display:block}
+.field{margin-bottom:13px}.field label{display:block;font-size:12px;font-weight:700;margin-bottom:6px}
+.field input,.field textarea,.field select{width:100%;padding:11px;border:1px solid #dce4dc;border-radius:6px}
+.field textarea{min-height:95px}
+footer{background:#073c29;color:#fff;padding:32px 4% 18px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:25px;margin-bottom:24px}
+footer h3{margin-bottom:12px}footer p,footer a{font-size:12px;color:#c5d7ca;line-height:2}
+.footer-links{display:flex;flex-direction:column}.copyright{text-align:center;border-top:1px solid #ffffff25;padding-top:16px;color:#b8cabe;font-size:11px}
+.whatsapp{position:fixed;bottom:18px;right:18px;background:#20b65a;color:#fff;border-radius:40px;padding:13px 18px;z-index:30;font-weight:700;box-shadow:0 5px 18px #0002;font-size:13px}
+.overlay{position:fixed;inset:0;background:#0008;z-index:50;display:none;align-items:center;justify-content:center;padding:15px}.overlay.show{display:flex}
+.modal{background:#fff;border-radius:13px;padding:25px;width:100%;max-width:650px;max-height:90vh;overflow-y:auto;position:relative}
+.modal h2{color:var(--green);margin-bottom:16px}.close{position:absolute;top:10px;right:15px;border:0;background:none;font-size:27px;color:#555}
+.cart-row{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid #eee}
+.qty{display:flex;gap:8px;align-items:center}.qty button{border:1px solid #ddd;background:#f5f5f5;border-radius:5px;width:27px;height:27px}
+.remove{border:0;background:none;color:#c44}.cart-total{display:flex;justify-content:space-between;font-weight:bold;font-size:19px;padding:18px 0}
+.payment-note{background:#fff5e8;color:#86551b;padding:12px;border-radius:7px;font-size:12px;line-height:1.6;margin:13px 0}
+.checkout-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.full{grid-column:1/-1}.empty{text-align:center;padding:35px;color:#777}
+@media(max-width:1100px){.products{grid-template-columns:repeat(4,minmax(0,1fr))}.categories{grid-template-columns:repeat(6,minmax(0,1fr))}.header-actions{gap:10px}.logo{min-width:auto}}
+@media(max-width:760px){header{flex-wrap:wrap;padding:13px 4%}.logo{flex:1}.search{order:3;max-width:100%;flex-basis:100%}.header-actions{gap:12px}.action span.label{display:none}nav{justify-content:center;gap:14px;padding:12px 4%}nav a{font-size:12px}.hero{grid-template-columns:1fr;padding:35px 7%;text-align:left}.hero-art{min-height:160px}.hero-art img{max-height:200px}.benefits{grid-template-columns:repeat(2,1fr);padding:12px}.benefit{padding:11px}.categories{grid-template-columns:repeat(4,minmax(0,1fr))}.products{grid-template-columns:repeat(3,minmax(0,1fr))}.promo-grid{grid-template-columns:1fr}.service-strip{grid-template-columns:repeat(2,1fr)}.service{border-right:0;justify-content:flex-start}.steps{grid-template-columns:repeat(2,1fr)}.contact-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.topbar{font-size:10px}.topbar-right{gap:8px}.logo-name{font-size:23px}.logo-mark{font-size:28px}.header-actions{gap:8px}.cart-btn{font-size:12px}.hero h1{font-size:34px}.hero-features{gap:10px}.section{padding:25px 4%}.section-head h2{font-size:21px}.categories{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.products{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.product-card img{height:120px}.product-info{padding:9px}.product-info h3{font-size:12px}.card-buttons{flex-direction:column}.benefit .emoji{width:34px;height:34px;font-size:18px}.benefit strong{font-size:11px}.benefit small{font-size:10px}.steps{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr}.checkout-grid{grid-template-columns:1fr}.full{grid-column:auto}.whatsapp{bottom:10px;right:10px;padding:11px 14px}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <span>🌍 Exporting Quality Products from India to the World</span>
+  <div class="topbar-right"><span>✉ info@nmexportia.com</span><span>☎ +91 63050 27034</span><span>🌐 Worldwide Shipping</span></div>
+</div>
+<header>
+  <a href="#home" class="logo"><div class="logo-mark">N<span>M</span></div><div class="logo-name"><span style="color:#f28c28">NM</span> Exportia<small>Connecting the World Through Trade</small></div></a>
+  <div class="search"><input id="searchInput" placeholder="Search for products (e.g. rice, wheat, corn...)"><button onclick="searchProducts()" aria-label="Search">⌕</button></div>
+  <div class="header-actions">
+    <button class="action" onclick="alert('Account registration can be connected when user accounts are added.')"><span class="ico">♙</span><span class="label">Login<br>Register</span></button>
+    <button class="action" onclick="showWishlist()"><span class="ico">♡</span><span class="label">Wishlist</span></button>
+    <button class="cart-btn" onclick="openCart()"><span class="ico" style="font-size:25px">🛒</span><span>Cart (<b id="cartCount">0</b>)</span></button>
+  </div>
+</header>
+<nav>
+  <a href="#home">Home</a><a href="#about">About Us</a><a href="#products">Products⌄</a><a href="#farmers">Our Farmers</a><a href="#process">Export Process</a><a href="#countries">Countries We Serve</a><a href="#blog">Blog</a><a href="#contact">Contact Us</a><a class="quote" href="#contact">Get a Quote</a>
+</nav>
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="eyebrow" id="heroTag">🇮🇳 India to the World</div>
+    <h1 id="heroTitle">From Indian Farms<br><span>To the World</span></h1>
+    <p id="heroText">Quality agricultural products for a healthier and brighter tomorrow. Sourced from trusted growers and prepared for global trade.</p>
+    <div class="hero-features"><span><b>✿</b> Premium Quality</span><span><b>◎</b> Global Export</span><span><b>♧</b> Direct from Farmers</span><span><b>◈</b> Safe & Sustainable</span></div>
+    <a href="#products" class="btn btn-green">Explore Products&nbsp; →</a>
+    <div class="dots"><button class="active" onclick="setSlide(0)"></button><button onclick="setSlide(1)"></button><button onclick="setSlide(2)"></button></div>
+  </div>
+  <div class="hero-art"><img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1000&q=85" alt="Fresh vegetables and farm produce"></div>
+  <div class="slider-controls"><button onclick="setSlide((currentSlide+2)%3)" aria-label="Previous">‹</button><button onclick="setSlide((currentSlide+1)%3)" aria-label="Next">›</button></div>
+</section>
+<div class="benefits">
+  <div class="benefit"><span class="emoji">▣</span><div><strong>Wide Range of Products</strong><small>Grains, vegetables, spices & more</small></div></div>
+  <div class="benefit"><span class="emoji">◎</span><div><strong>Export to 100+ Countries</strong><small>Global trade network</small></div></div>
+  <div class="benefit"><span class="emoji">◆</span><div><strong>Best Prices</strong><small>Wholesale and bulk orders</small></div></div>
+  <div class="benefit"><span class="emoji">✓</span><div><strong>Secure & Safe Orders</strong><small>Payment terms confirmed directly</small></div></div>
+</div>
+<section class="section" id="categories">
+  <div class="categories" id="categoryList"></div>
+</section>
+<section class="section products-section" id="products">
+  <div class="section-head"><div><h2>🌿 Featured Products</h2><p>Quality products for homes, retailers, wholesalers, and global buyers.</p></div><a class="text-link" href="#products" onclick="filterCategory('All Products')">View All Products&nbsp; →</a></div>
+  <div class="product-toolbar"><span id="productCount">Showing all products</span><select id="sortSelect" onchange="sortProducts()"><option value="default">Sort: Featured</option><option value="low">Price: Low to High</option><option value="high">Price: High to Low</option><option value="name">Name: A to Z</option></select></div>
+  <div class="products" id="productList"></div>
+</section>
+<section class="section" id="about">
+  <div class="promo-grid">
+    <div class="promo farm" id="farmers"><h2>Supporting Farmers<br>Empowering the World</h2><p>We connect quality Indian produce with buyers through trusted sourcing and trade.</p><a href="#contact" class="btn btn-orange">Know More →</a></div>
+    <div class="promo ship" id="countries"><h2>Quality Products<br>Global Reach</h2><p>Fresh, safe, high-quality agricultural products for buyers across markets.</p><a href="#process" class="btn btn-green">Our Export Process →</a></div>
+    <div class="promo global" id="blog"><h2>Join Our Global Network</h2><p>Become a buyer, distributor, or business partner. Let’s grow together.</p><a href="#contact" class="btn btn-orange">Register Interest →</a></div>
+  </div>
+</section>
+<div class="service-strip">
+  <div class="service"><span class="symbol">🚚</span><div><strong>Worldwide Shipping</strong><small>Global logistics inquiries</small></div></div>
+  <div class="service"><span class="symbol">🛡️</span><div><strong>Quality Assurance</strong><small>Quality-focused sourcing</small></div></div>
+  <div class="service"><span class="symbol">🎧</span><div><strong>Support</strong><small>We’re here to help</small></div></div>
+  <div class="service"><span class="symbol">🟢</span><div><strong>WhatsApp Support</strong><small>Chat with us</small></div></div>
+  <div class="service"><span class="symbol">✉</span><div><strong>Email Us</strong><small>info@nmexportia.com</small></div></div>
+</div>
+<section class="section" id="process">
+  <div class="section-head"><div><h2>How Our Export Process Works</h2><p>Four simple steps to start an order inquiry.</p></div></div>
+  <div class="steps">
+    <div class="step"><div class="icon">🛍️</div><h3>1. Choose Products</h3><p>Browse the catalog and select the products and quantities you need.</p></div>
+    <div class="step"><div class="icon">📝</div><h3>2. Send an Inquiry</h3><p>Share your contact details and request a quotation.</p></div>
+    <div class="step"><div class="icon">📦</div><h3>3. Confirm Details</h3><p>Confirm availability, quantity, packing, shipping, and payment terms.</p></div>
+    <div class="step"><div class="icon">🚢</div><h3>4. Shipping & Delivery</h3><p>Shipping arrangements are made according to the agreed terms.</p></div>
+  </div>
+</section>
+<section class="section contact-section" id="contact">
+  <div class="section-head"><div><h2>Let’s Do Business Together</h2><p>Have a question or need a bulk quotation? Contact our team.</p></div></div>
+  <div class="contact-grid">
+    <div class="contact-info"><h2>Contact NM Exportia</h2><p>We welcome inquiries from buyers, wholesalers, distributors, and business partners worldwide.</p>
+      <div class="contact-item"><strong>📍 Business Location</strong>Lothkuntha, Hyderabad, Telangana, India<br><a target="_blank" href="https://www.google.com/maps/search/?api=1&query=Lothkuntha%2C+Hyderabad%2C+Telangana%2C+India">View on Google Maps →</a></div>
+      <div class="contact-item"><strong>✉ Email</strong><a href="mailto:info@nmexportia.com">info@nmexportia.com</a></div>
+      <div class="contact-item"><strong>☎ Phone / WhatsApp</strong><a href="https://wa.me/916305027034" target="_blank">+91 63050 27034</a></div>
+      <div class="contact-item"><strong>🌍 Business</strong>Agricultural Products & Goods Export</div>
+    </div>
+    <form class="contact-form" onsubmit="sendInquiry(event)"><h3>Send an Inquiry</h3>
+      <div class="field"><label>Your Name</label><input id="inqName" required placeholder="Enter your name"></div>
+      <div class="field"><label>Email Address</label><input id="inqEmail" type="email" required placeholder="Enter your email"></div>
+      <div class="field"><label>Product Interested In</label><input id="inqProduct" placeholder="e.g. Basmati Rice"></div>
+      <div class="field"><label>Message</label><textarea id="inqMessage" required placeholder="Tell us what you need..."></textarea></div>
+      <button class="btn btn-green" type="submit">Send Inquiry →</button>
+    </form>
+  </div>
+</section>
+<footer><div class="footer-grid">
+  <div><h3>🌿 NM Exportia</h3><p>Connecting the World Through Trade.</p><p>Exporting quality products from India to global markets.</p></div>
+  <div class="footer-links"><h3>Quick Links</h3><a href="#home">Home</a><a href="#about">About Us</a><a href="#products">Products</a><a href="#process">Export Process</a></div>
+  <div class="footer-links"><h3>Contact</h3><a href="mailto:info@nmexportia.com">info@nmexportia.com</a><a href="https://wa.me/916305027034" target="_blank">WhatsApp Support</a><a href="#contact">Request a Quote</a></div>
+</div><div class="copyright">© 2026 NM Exportia. All rights reserved.</div></footer>
+<a class="whatsapp" href="https://wa.me/916305027034?text=Hello%20NM%20Exportia%2C%20I%20am%20interested%20in%20your%20products." target="_blank">☏ WhatsApp</a>
+
+<div class="overlay" id="cartOverlay" onclick="outsideClose(event,'cartOverlay')"><div class="modal"><button class="close" onclick="closeModal('cartOverlay')">×</button><h2>🛒 Your Shopping Cart</h2><div id="cartItems"></div><div class="cart-total"><span>Total</span><span id="cartTotal">₹0</span></div><button class="btn btn-green" style="width:100%" onclick="checkout()">Proceed to Checkout →</button></div></div>
+<div class="overlay" id="checkoutOverlay" onclick="outsideClose(event,'checkoutOverlay')"><div class="modal"><button class="close" onclick="closeModal('checkoutOverlay')">×</button><h2>📦 Checkout & Order Details</h2><div id="checkoutSummary"></div><div class="cart-total"><span>Estimated Total</span><span id="checkoutTotal">₹0</span></div>
+<form onsubmit="placeOrder(event)"><div class="checkout-grid">
+<div class="field"><label>Full Name *</label><input id="buyerName" required placeholder="Your full name"></div><div class="field"><label>Email *</label><input id="buyerEmail" type="email" required placeholder="Your email"></div>
+<div class="field"><label>Phone / WhatsApp *</label><input id="buyerPhone" required placeholder="+91..."></div><div class="field"><label>Country *</label><input id="buyerCountry" required placeholder="Country"></div>
+<div class="field full"><label>Delivery Address *</label><textarea id="buyerAddress" required placeholder="Full delivery address"></textarea></div>
+<div class="field"><label>Order Type</label><select id="orderType"><option>Retail Order</option><option>Wholesale Order</option><option>Export / Bulk Inquiry</option></select></div>
+<div class="field"><label>Payment Preference</label><select id="paymentMethod"><option>Bank Transfer (to be confirmed)</option><option>UPI (India, to be confirmed)</option><option>Payment Link (to be arranged)</option><option>Discuss payment with seller</option></select></div>
+</div><div class="payment-note"><strong>Demo checkout:</strong> No payment is collected on this website. Confirm final prices, availability, shipping, and payment details with the seller.</div><button class="btn btn-orange" style="width:100%" type="submit">Submit Order via WhatsApp →</button></form></div></div>
+<script>
+const WHATSAPP_NUMBER="916305027034";
+const products=[
+{id:1,name:"Premium Basmati Rice",category:"Grains",price:85,unit:"kg",img:"https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=700&q=80",desc:"Aromatic long-grain rice for everyday and bulk use."},
+{id:2,name:"Wheat Grains",category:"Grains",price:32,unit:"kg",img:"https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=700&q=80",desc:"Quality wheat grains for food and milling."},
+{id:3,name:"Fresh Corn",category:"Vegetables",price:20,unit:"kg",img:"https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=700&q=80",desc:"Fresh corn suitable for cooking and processing."},
+{id:4,name:"Fresh Tomato",category:"Vegetables",price:25,unit:"kg",img:"https://images.unsplash.com/photo-1546094096-0df4bcaaa337?auto=format&fit=crop&w=700&q=80",desc:"Fresh tomatoes for household and commercial use."},
+{id:5,name:"Red Onion",category:"Vegetables",price:22,unit:"kg",img:"https://images.unsplash.com/photo-1508747703725-719777637510?auto=format&fit=crop&w=700&q=80",desc:"Versatile onions for cooking and food supply."},
+{id:6,name:"Fresh Potato",category:"Vegetables",price:18,unit:"kg",img:"https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=700&q=80",desc:"Everyday potatoes for retail and wholesale."},
+{id:7,name:"Fresh Carrot",category:"Vegetables",price:35,unit:"kg",img:"https://images.unsplash.com/photo-1445282768818-728615cc910a?auto=format&fit=crop&w=700&q=80",desc:"Fresh carrots for cooking and food distribution."},
+{id:8,name:"Fresh Brinjal",category:"Vegetables",price:30,unit:"kg",img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlnumn1xVrvLt5GZGXz6O9jqPEtZ289tWYLQ-0nrVvjA&s=10",desc:"Fresh round brinjal for daily cooking and food supply."},
+{id:9,name:"Green Cabbage",category:"Vegetables",price:24,unit:"kg",img:"https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?auto=format&fit=crop&w=700&q=80",desc:"Fresh cabbage for kitchens and wholesale buyers."},
+{id:10,name:"Mixed Pulses",category:"Pulses",price:95,unit:"kg",img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjEmiEQ4Mq6ZuV2P3epJEEDex5CmobhywBXSqt8vyBAw&s=10",desc:"Nutritious pulses for food and grocery businesses."},
+{id:11,name:"Indian Spices",category:"Spices",price:180,unit:"kg",img:"https://images.unsplash.com/photo-1532336414038-cf19250c5757?auto=format&fit=crop&w=700&q=80",desc:"A selection of flavorful Indian spices."},
+{id:12,name:"Turmeric Powder",category:"Spices",price:160,unit:"kg",img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbfOyhUuirNC63M7mIExNwSg61-ERVxKzMzqd3keXvNw&s=10",desc:"Golden turmeric for culinary and food supply."},
+{id:13,name:"Green Chilli",category:"Vegetables",price:45,unit:"kg",img:"https://images.unsplash.com/photo-1588252303782-cb80119abd6d?auto=format&fit=crop&w=700&q=80",desc:"Fresh green chillies for cooking and distribution."},
+{id:14,name:"Fresh Okra",category:"Vegetables",price:40,unit:"kg",img:"https://images.unsplash.com/photo-1425543103986-22abb7d7e8d2?auto=format&fit=crop&w=700&q=80",desc:"Fresh okra for retail and wholesale supply."},
+{id:15,name:"Millet Grains",category:"Grains",price:55,unit:"kg",img:"https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=700&q=80",desc:"Millet grains for food and grain markets."},
+{id:16,name:"Fresh Garlic",category:"Vegetables",price:110,unit:"kg",img:"https://images.unsplash.com/photo-1540148426945-6cf22a6b2383?auto=format&fit=crop&w=700&q=80",desc:"Garlic for kitchens, wholesalers, and food businesses."},
+{id:17,name:"Green Peas",category:"Vegetables",price:60,unit:"kg",img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuv-0n9bPRkt8QcIEpp2W39di2Yy5SbD52p4dX6Qtqog&s=10",desc:"Fresh green peas for food supply."},
+{id:18,name:"Red Chilli",category:"Spices",price:140,unit:"kg",img:"https://images.unsplash.com/photo-1588252303782-cb80119abd6d?auto=format&fit=crop&w=700&q=80",desc:"Dried and fresh chilli varieties for buyers."},
+{id:19,name:"Fresh Cauliflower",category:"Vegetables",price:28,unit:"kg",img:"https://images.unsplash.com/photo-1568584711075-3d021a7c3ca3?auto=format&fit=crop&w=700&q=80",desc:"Fresh cauliflower for cooking and wholesale."},
+{id:20,name:"Chickpeas",category:"Pulses",price:90,unit:"kg",img:"https://images.unsplash.com/photo-1515543904379-3d757afe72e4?auto=format&fit=crop&w=700&q=80",desc:"Chickpeas for grocery, retail, and food businesses."},
+{id:21,name:"Red Lentils",category:"Pulses",price:105,unit:"kg",img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVBdAHFfMUe7rWHIIT1He3fEw_hsPeom-J98Z6pdqD1w&s=10",desc:"Lentils for household and commercial kitchens."},
+{id:22,name:"Coriander Seeds",category:"Spices",price:120,unit:"kg",img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNsR75wIrfP5eihCgORx94RWF7IX3z-52iA5a6PZbVAw&s=10",desc:"Aromatic coriander seeds for culinary use."}
+];
+const categories=[
+{name:"Rice",filter:"Grains",img:products[0].img},{name:"Wheat",filter:"Grains",img:products[1].img},{name:"Corn",filter:"Fresh Corn",img:products[2].img},
+{name:"Tomato",filter:"Fresh Tomato",img:products[3].img},{name:"Onion",filter:"Red Onion",img:products[4].img},{name:"Potato",filter:"Fresh Potato",img:products[5].img},
+{name:"Carrot",filter:"Fresh Carrot",img:products[6].img},{name:"Brinjal",filter:"Fresh Brinjal",img:products[7].img},{name:"Cabbage",filter:"Green Cabbage",img:products[8].img},
+{name:"Pulses",filter:"Pulses",img:products[9].img},{name:"Spices",filter:"Spices",img:products[10].img}
+];
+let cart=[],wishlist=[],displayedProducts=[...products],currentSlide=0;
+const money=n=>"₹"+Number(n).toLocaleString("en-IN",{maximumFractionDigits:2});
+function renderCategories(){document.getElementById("categoryList").innerHTML=categories.map(c=>`<button class="category" onclick="filterCategory('${c.filter}')"><img src="${c.img}" alt="${c.name}" loading="lazy"><h3>${c.name}</h3></button>`).join("")}
+function renderProducts(list=displayedProducts){const el=document.getElementById("productList");document.getElementById("productCount").textContent=`Showing ${list.length} products`;if(!list.length){el.innerHTML='<div class="empty">No products found. Try another search.</div>';return}el.innerHTML=list.map(p=>`<article class="product-card"><div class="product-image"><img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/700x450/eaf2e9/23583a?text=Fresh+Produce'"><button class="wish" onclick="toggleWish(${p.id},this)" aria-label="Add to wishlist">${wishlist.includes(p.id)?"♥":"♡"}</button></div><div class="product-info"><span class="category-label">${p.category}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="price-row"><div class="price">${money(p.price)} <small>/ ${p.unit}</small></div></div><div class="rating">★★★★☆ <span style="color:#888;font-size:10px">(demo)</span></div><div class="card-buttons"><button class="add-btn" onclick="addToCart(${p.id})">Add to Cart</button><button class="buy-btn" onclick="buyNow(${p.id})">Buy Now</button></div></div></article>`).join("")}
+function filterCategory(name){if(name==="All Products")displayedProducts=[...products];else if(name==="Grains"||name==="Pulses"||name==="Spices"||name==="Vegetables")displayedProducts=products.filter(p=>p.category===name);else displayedProducts=products.filter(p=>p.name.toLowerCase().includes(name.toLowerCase()));renderProducts();document.getElementById("products").scrollIntoView({behavior:"smooth"})}
+function searchProducts(){const q=document.getElementById("searchInput").value.trim().toLowerCase();displayedProducts=products.filter(p=>(p.name+" "+p.category+" "+p.desc).toLowerCase().includes(q));renderProducts();document.getElementById("products").scrollIntoView({behavior:"smooth"})}
+document.getElementById("searchInput").addEventListener("keydown",e=>{if(e.key==="Enter")searchProducts()});
+function sortProducts(){const mode=document.getElementById("sortSelect").value;displayedProducts.sort((a,b)=>mode==="low"?a.price-b.price:mode==="high"?b.price-a.price:mode==="name"?a.name.localeCompare(b.name):a.id-b.id);renderProducts()}
+function addToCart(id){const item=cart.find(x=>x.id===id);if(item)item.qty++;else cart.push({id,qty:1});updateCart();alert("Product added to your cart!")}
+function buyNow(id){const item=cart.find(x=>x.id===id);if(item)item.qty++;else cart.push({id,qty:1});updateCart();checkout()}
+function toggleWish(id,button){if(wishlist.includes(id))wishlist=wishlist.filter(x=>x!==id);else wishlist.push(id);button.textContent=wishlist.includes(id)?"♥":"♡"}
+function showWishlist(){if(!wishlist.length){alert("Your wishlist is empty. Tap ♡ on a product to save it.");return}displayedProducts=products.filter(p=>wishlist.includes(p.id));renderProducts();document.getElementById("products").scrollIntoView({behavior:"smooth"})}
+function updateCart(){document.getElementById("cartCount").textContent=cart.reduce((s,x)=>s+x.qty,0);const total=cart.reduce((s,x)=>s+products.find(p=>p.id===x.id).price*x.qty,0);document.getElementById("cartTotal").textContent=money(total);document.getElementById("checkoutTotal").textContent=money(total);renderCart()}
+function renderCart(){const el=document.getElementById("cartItems");if(!cart.length){el.innerHTML='<div class="empty">Your cart is empty. Explore our products!</div>';return}el.innerHTML=cart.map(x=>{const p=products.find(p=>p.id===x.id);return `<div class="cart-row"><div><strong>${p.name}</strong><br><small>${money(p.price)} / ${p.unit}</small></div><div class="qty"><button onclick="changeQty(${p.id},-1)">−</button><span>${x.qty}</span><button onclick="changeQty(${p.id},1)">+</button></div><button class="remove" onclick="removeItem(${p.id})">Remove</button></div>`}).join("")}
+function changeQty(id,d){const item=cart.find(x=>x.id===id);if(!item)return;item.qty+=d;if(item.qty<=0)cart=cart.filter(x=>x.id!==id);updateCart()}
+function removeItem(id){cart=cart.filter(x=>x.id!==id);updateCart()}
+function openCart(){renderCart();document.getElementById("cartOverlay").classList.add("show")}
+function closeModal(id){document.getElementById(id).classList.remove("show")}
+function outsideClose(e,id){if(e.target.id===id)closeModal(id)}
+function checkout(){if(!cart.length){alert("Your cart is empty. Please add products first.");return}closeModal("cartOverlay");document.getElementById("checkoutSummary").innerHTML=cart.map(x=>{const p=products.find(p=>p.id===x.id);return `<p style="padding:6px 0">${p.name} × ${x.qty} — <strong>${money(p.price*x.qty)}</strong></p>`}).join("");document.getElementById("checkoutOverlay").classList.add("show")}
+function placeOrder(e){e.preventDefault();const total=cart.reduce((s,x)=>s+products.find(p=>p.id===x.id).price*x.qty,0);const items=cart.map(x=>{const p=products.find(p=>p.id===x.id);return `${p.name} x ${x.qty} = ${money(p.price*x.qty)}`}).join("\n");const message=`Hello NM Exportia! I would like to submit an order inquiry.\n\nName: ${buyerName.value}\nEmail: ${buyerEmail.value}\nPhone: ${buyerPhone.value}\nCountry: ${buyerCountry.value}\nAddress: ${buyerAddress.value}\nOrder Type: ${orderType.value}\nPayment Preference: ${paymentMethod.value}\n\nProducts:\n${items}\n\nEstimated product total: ${money(total)}\n\nPlease confirm availability, shipping costs, and final payment details.`;window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,"_blank")}
+function sendInquiry(e){e.preventDefault();const message=`Hello NM Exportia!\nName: ${inqName.value}\nEmail: ${inqEmail.value}\nProduct: ${inqProduct.value}\nMessage: ${inqMessage.value}`;window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,"_blank")}
+const slides=[
+{tag:"🇮🇳 India to the World",title:"From Indian Farms<br><span>To the World</span>",text:"Quality agricultural products for a healthier and brighter tomorrow. Sourced from trusted growers and prepared for global trade."},
+{tag:"✦ Quality You Can Trust",title:"Fresh Products.<br><span>Global Markets.</span>",text:"Explore grains, vegetables, pulses, and spices for retail, wholesale, and international trade."},
+{tag:"🌍 Your Global Trade Partner",title:"Connecting Businesses<br><span>Across Borders.</span>",text:"Contact us for product availability, bulk inquiries, and customized export quotations."}
+];
+function setSlide(i){currentSlide=(i+3)%3;const s=slides[currentSlide];document.getElementById("heroTag").innerHTML=s.tag;document.getElementById("heroTitle").innerHTML=s.title;document.getElementById("heroText").textContent=s.text;document.querySelectorAll(".dots button").forEach((b,j)=>b.classList.toggle("active",j===currentSlide))}
+setInterval(()=>setSlide(currentSlide+1),6500);
+renderCategories();renderProducts();updateCart();
+</script>
+</body>
+</html>
